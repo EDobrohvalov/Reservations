@@ -15,28 +15,22 @@ with Diagram("Container diagram for Reservation Resource System"):
             description="application on any SPA framework",
         )
 
+        #api/resources/v1 [GET]
+        #api/resources/v1/create [POST]
+        #api/resources/v1/{id} [GET]
+        #api/resources/v1/{id}/delete [POST]
+        #api/booking/v1 [GET] 
+        #api/booking/v1/create [POST]
+        #api/booking/v1/{id} [GET] 
+        #api/booking/v1/{id}/release [POST]
+        #api/booking/v1/{id}/history [GET]
+        #api/booking/v1/byresource?res_id= [GET] 
+        #api/booking/v1/bytimerange?from=;to= [GET] 
         api = Container(
             name="api-gateway",
             technology="Java and Spring MVC",
             description="Provides resource and bookings management via a JSON/HTTPS API.",
         )
-        
-        api_methods = Container(name="API Methods",
-                                technology="",
-                                description="""
-                                    api/resources/v1 [GET]
-                                    api/resources/v1/create [POST]
-                                    api/resources/v1/{id} [GET]
-                                    api/resources/v1/{id}/delete [POST]
-                                    api/booking/v1 [GET] 
-                                    api/booking/v1/create [POST]
-                                    api/booking/v1/{id} [GET] 
-                                    api/booking/v1/{id}/release [POST]
-                                    api/booking/v1/{id}/history [GET]
-                                    api/booking/v1/byresource?res_id= [GET] 
-                                    api/booking/v1/bytimerange?from=;to= [GET] 
-                                """
-                                )
         
         with SystemBoundary("Resource service"):
                   
