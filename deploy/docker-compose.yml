@@ -7,15 +7,22 @@ services:
       context: ../resources-service
       dockerfile: ../resources-service/Dockerfile
 
+  resources-db-migrate:
+    image: ghcr.io/kukymbr/goose-docker:3.15.1
+    environment:
+      - GOOSE_DRIVER=postgres
+      - GOOSE_DBSTRING=host=resources-db port=${RESOURCE_DB_PORT} user=${RESOURCE_DB_USER} password=${RESOURCE_DB_PASS} dbname=postgres
+    volumes:
+      - ../resources-service/migrations:/migrations:z
 
   resources-db:
     image: postgres:14.1-alpine
     restart: always
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=${RESOURCE_DB_USER}
+      - POSTGRES_PASSWORD=${RESOURCE_DB_PASS}
     ports:
-      - '5432:5432'
+      - '${RESOURCE_DB_PORT}:5432'
     volumes:
       - resources-data:/var/lib/postgresql/data
 
@@ -23,14 +30,15 @@ services:
     image: postgres:14.1-alpine
     restart: always
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=${BOOKING_DB_USER}
+      - POSTGRES_PASSWORD=${BOOKING_DB_PASS}
     ports:
-      - '5433:5432'
+      - '${BOOKING_DB_PORT}:5432'
     volumes:
       - booking-data:/var/lib/postgresql/data
 
 volumes:
+
   resources-data:
     driver: local
 
