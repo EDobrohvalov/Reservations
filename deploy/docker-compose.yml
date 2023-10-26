@@ -1,6 +1,13 @@
 version: '3.8'
 
 services:
+
+  resource-srv:
+    build:
+      context: ../resources-service
+      dockerfile: ../resources-service/Dockerfile
+
+
   resources-db:
     image: postgres:14.1-alpine
     restart: always
