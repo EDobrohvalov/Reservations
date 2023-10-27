@@ -2,7 +2,7 @@ from diagrams import Diagram
 from diagrams.c4 import Person, Container, Database, SystemBoundary, Relationship
 from diagrams.onprem.queue import Kafka
 
-with Diagram("Container diagram for Reservation Resource System"):
+with Diagram("Container diagram for Reservation Resource System", show=True):
     customer = Person(
         name="User", description="A client who needs to book some resource for a certain period of time"
     )
